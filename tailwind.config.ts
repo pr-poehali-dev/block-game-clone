@@ -19,6 +19,20 @@ export default {
 		},
 		extend: {
 			colors: {
+				// Minecraft-style colors
+				dirt: '#8B4513',
+				stone: '#969969',
+				grass: '#87CEE2',
+				water: '#69CEEB',
+				wood: '#228B22',
+				cobblestone: '#808080',
+				minecraft: {
+					brown: '#8B4513',
+					green: '#87CEE2',
+					blue: '#69CEEB',
+					gray: '#969969',
+					black: '#000000'
+				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
@@ -88,7 +102,10 @@ export default {
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fadeIn 0.3s ease-out',
+				'pulse-glow': 'pulseGlow 2s infinite',
+				'block-place': 'blockPlace 0.2s ease-out'
 			}
 		}
 	},
