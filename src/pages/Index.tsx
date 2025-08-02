@@ -285,18 +285,20 @@ const Index = () => {
   }, [checkGameOver, gameState.isGameRunning]);
 
   const MenuScreen = () => (
-    <div className="min-h-screen bg-gradient-to-b from-fnaf-dark to-fnaf-office flex flex-col items-center justify-center p-8">
-      <div className="text-center mb-12 animate-fade-in">
-        <h1 className="text-6xl font-bold text-fnaf-danger mb-4" style={{ 
+    <div className="min-h-screen bg-gradient-to-b from-fnaf-dark to-fnaf-office flex flex-col items-center justify-center p-8" style={{ perspective: '1000px' }}>
+      <div className="text-center mb-12 animate-fade-in transform-gpu" style={{ transformStyle: 'preserve-3d' }}>
+        <h1 className="text-6xl font-bold text-fnaf-danger mb-4 animate-float-3d" style={{ 
           fontFamily: 'monospace',
           textShadow: '3px 3px 0px #000',
-          letterSpacing: '2px'
+          letterSpacing: '2px',
+          transform: 'translateZ(50px)'
         }}>
           FIVE NIGHTS
         </h1>
-        <h2 className="text-4xl font-bold text-fnaf-warning mb-4" style={{ 
+        <h2 className="text-4xl font-bold text-fnaf-warning mb-4 animate-rotate-3d" style={{ 
           fontFamily: 'monospace',
-          textShadow: '2px 2px 0px #000'
+          textShadow: '2px 2px 0px #000',
+          transform: 'translateZ(30px)'
         }}>
           AT FREDDY'S
         </h2>
@@ -334,7 +336,7 @@ const Index = () => {
   );
 
   const GameScreen = () => (
-    <div className="min-h-screen bg-fnaf-office flex flex-col relative overflow-hidden">
+    <div className="min-h-screen bg-fnaf-office flex flex-col relative overflow-hidden" style={{ perspective: '1500px' }}>
       {/* Status Bar */}
       <div className="bg-fnaf-dark/90 text-white p-3 flex justify-between items-center border-b border-gray-600">
         <div className="flex items-center space-x-6">
@@ -360,16 +362,16 @@ const Index = () => {
         <div className="flex-1 relative">
           {!gameState.cameraActive ? (
             // Office View
-            <div className="h-full bg-gradient-to-b from-fnaf-office to-fnaf-dark flex items-center justify-center relative">
+            <div className="h-full bg-gradient-to-b from-fnaf-office to-fnaf-dark flex items-center justify-center relative transform-gpu" style={{ transformStyle: 'preserve-3d' }}>
               <div className="text-center">
-                <h2 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: 'monospace' }}>
+                <h2 className="text-3xl font-bold text-white mb-4 animate-float-3d" style={{ fontFamily: 'monospace', transform: 'translateZ(50px)' }}>
                   ОФИС ОХРАННИКА
                 </h2>
                 <p className="text-white/70 mb-8">Используйте камеры для наблюдения</p>
                 
                 {/* Door Controls */}
-                <div className="flex justify-center space-x-8 mt-8">
-                  <div className="text-center">
+                <div className="flex justify-center space-x-8 mt-8" style={{ transform: 'translateZ(30px)' }}>
+                  <div className="text-center transform transition-all duration-300 hover:scale-110" style={{ transform: 'rotateY(-10deg) translateZ(20px)' }}>
                     <h3 className="text-white font-bold mb-2">ЛЕВАЯ ДВЕРЬ</h3>
                     <div className="space-y-2">
                       <Button
@@ -379,7 +381,8 @@ const Index = () => {
                             setGameState(prev => ({ ...prev, leftLightOn: !prev.leftLightOn }));
                           }
                         }}
-                        className={`w-20 h-12 ${gameState.leftLightOn ? 'bg-fnaf-warning' : 'bg-fnaf-camera'} hover:opacity-80`}
+                        className={`w-20 h-12 ${gameState.leftLightOn ? 'bg-fnaf-warning' : 'bg-fnaf-camera'} hover:opacity-80 transform transition-all duration-200 hover:scale-110 hover:-rotate-3`}
+                        style={{ boxShadow: gameState.leftLightOn ? '0 0 20px rgba(255, 255, 136, 0.5)' : 'none' }}
                         disabled={gameState.power === 0}
                       >
                         <Icon name="Lightbulb" size={16} />
@@ -441,21 +444,22 @@ const Index = () => {
             </div>
           ) : (
             // Camera View
-            <div className="h-full bg-fnaf-camera relative">
+            <div className="h-full bg-fnaf-camera relative transform-gpu animate-zoom-3d" style={{ transformStyle: 'preserve-3d' }}>
               <div className="p-4">
-                <div className="bg-fnaf-dark/80 p-4 rounded border border-fnaf-static">
+                <div className="bg-fnaf-dark/80 p-4 rounded border border-fnaf-static transform" style={{ transform: 'translateZ(20px)', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
                   <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-fnaf-safe font-bold text-xl" style={{ fontFamily: 'monospace' }}>
+                    <h2 className="text-fnaf-safe font-bold text-xl animate-float-3d" style={{ fontFamily: 'monospace', transform: 'translateZ(10px)' }}>
                       CAM - {cameras.find(c => c.id === gameState.currentCamera)?.name}
                     </h2>
-                    <div className="text-fnaf-static text-sm animate-pulse">●REC</div>
+                    <div className="text-fnaf-static text-sm animate-pulse transform" style={{ transform: 'translateZ(5px)' }}>●REC</div>
                   </div>
                   
                   {/* Camera Feed */}
-                  <div className="bg-fnaf-dark h-64 flex items-center justify-center border border-fnaf-static relative overflow-hidden">
+                  <div className="bg-fnaf-dark h-64 flex items-center justify-center border border-fnaf-static relative overflow-hidden transform" style={{ transform: 'translateZ(10px)', perspective: '500px' }}>
                     {/* Static effect */}
                     <div className="absolute inset-0 opacity-20">
                       <div className="w-full h-full bg-gradient-to-r from-transparent via-fnaf-static to-transparent animate-pulse"></div>
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-fnaf-static/10 to-transparent animate-float-3d"></div>
                     </div>
                     
                     <div className="text-center z-10">
