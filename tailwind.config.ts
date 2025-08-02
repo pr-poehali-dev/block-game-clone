@@ -19,19 +19,17 @@ export default {
 		},
 		extend: {
 			colors: {
-				// Minecraft-style colors
-				dirt: '#8B4513',
-				stone: '#969969',
-				grass: '#87CEE2',
-				water: '#69CEEB',
-				wood: '#228B22',
-				cobblestone: '#808080',
-				minecraft: {
-					brown: '#8B4513',
-					green: '#87CEE2',
-					blue: '#69CEEB',
-					gray: '#969969',
-					black: '#000000'
+				// FNAF-style colors
+				fnaf: {
+					dark: '#0a0a0a',
+					office: '#1a1a1a', 
+					camera: '#2a2a2a',
+					danger: '#ff0000',
+					warning: '#ffaa00',
+					safe: '#00ff00',
+					light: '#ffff88',
+					static: '#555555',
+					purple: '#663399'
 				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
